@@ -16,10 +16,7 @@ public class CameraMove : MonoBehaviour {
     private float dynamicSpeed = 0;
     private Camera _cam;
 
-    
-}
-
-void Start()
+   void Start()
 {
     offset = new Vector2(Mathf.Abs(offset.x), offset.y);
     FindPlayer();
@@ -52,4 +49,6 @@ void FixedUpdate()
         Vector3 currentPosition = Vector3.Lerp(transform.position, target, damping * Time.deltaTime);
         transform.position = currentPosition;
     }
+} 
 }
+

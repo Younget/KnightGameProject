@@ -7,7 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WindMill : MonoBehaviour {
+public class WindMill : MonoBehaviour
+{
     public float _Speed;
     private float _currDist, _dist;
 

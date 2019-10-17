@@ -19,35 +19,34 @@ public class DamageOnCollide : MonoBehaviour
     //functions to run when object is set to destroy itself
     public UnityEvent DestroyFunctions;
 
-    
-}
-
-private void OnCollisionEnter2D(Collision2D collision)
-{
-    Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-    if (enemy != null)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        enemy.Health -= DamageAmount;
-
+        Health otherHealth = collision.gameObject.GetComponent<Health>();
+        if (otherHealth != null)
+        {
+            otherHealth.Damage(DamageAmount);
+            DamageFunctions.Invoke();
+        }
+        if (DestroyOnCollide)
+        {
+            DestroyFunctions.Invoke();
+            Destroy(gameObject);
+        }
     }
-    if (DestroyOnCollide)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        Destroy(gameObject);
-    }
-}
-
-private void OnTriggerEnter2D(Collider2D collision)
-{
-    Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-    if (enemy != null)
-    {
-        enemy.Health -= DamageAmount;
-
-    }
-    if (DestroyOnCollide)
-    {
-
-        Destroy(gameObject);
+        Health otherHealth = collision.gameObject.GetComponent<Health>();
+        if (otherHealth != null)
+        {
+            otherHealth.Damage(DamageAmount);
+            DamageFunctions.Invoke();
+        }
+        if (DestroyOnCollide)
+        {
+            DestroyFunctions.Invoke();
+            Destroy(gameObject);
+        }
     }
 }
+
